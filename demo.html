@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cẩm Nang An Toàn Thông Tin Số - Đại học Trà Vinh</title>
+    <!-- Google Fonts & Tailwind CSS for modern aesthetic design -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        tvuBlue: {
+                            DEFAULT: '#005088',
+                            dark: '#003b66',
+                            light: '#1e75b3',
+                            bg: '#f0f6fa'
+                        },
+                        tvuOrange: {
+                            DEFAULT: '#ff823a',
+                            dark: '#e0651d',
+                            light: '#ffaa73'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth transition effects */
+        .page-view {
+            transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        }
+        .hidden-view {
+            display: none !important;
+            opacity: 0;
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col font-sans">
+
+    <!-- ========================================== -->
+    <!-- 1. TRANG ĐĂNG NHẬP (LOGIN PAGE)           -->
+    <!-- ========================================== -->
+    <div id="login-page" class="page-view flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-tvuBlue to-tvuBlue-dark relative overflow-hidden">
+        <!-- Abstract background shapes for premium consulting feel -->
+        <div class="absolute -top-10 -left-10 w-40 h-40 bg-tvuOrange opacity-20 rounded-full blur-2xl"></div>
+        <div class="absolute -bottom-10 -right-10 w-60 h-60 bg-white opacity-10 rounded-full blur-3xl"></div>
+
+        <div class="max-w-md w-full space-y-8 bg-white p-8 rounded-2xl shadow-2xl relative z-10 border border-white/20">
+            <div class="text-center">
+                <!-- Simulated TVU Logo Concept -->
+                <div class="mx-auto h-20 w-20 bg-tvuBlue text-white flex items-center justify-center rounded-full text-2xl font-extrabold shadow-lg border-4 border-tvuBlue-bg">
+                    TVU
+                </div>
+                <h2 class="mt-6 text-2xl font-extrabold text-tvuBlue-dark tracking-tight">
+                    CỔNG THÔNG TIN SINH VIÊN
+                </h2>
+                <p class="mt-2 text-sm text-slate-500">
+                    Đăng nhập hệ thống Cẩm nang & Khảo sát ATTT Số
+                </p>
+            </div>
+            
+            <form class="mt-8 space-y-6" onsubmit="handleLogin(event)">
+                <div class="rounded-md shadow-sm space-y-4">
+                    <div>
+                        <label for="student-id" class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Mã số sinh viên (MSSV)</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+                                <i class="fa-solid fa-id-card"></i>
+                            </span>
+                            <input id="student-id" name="studentId" type="text" required class="appearance-none rounded-lg relative block w-full pl-10 pr-3 py-3 border border-slate-300 placeholder-slate-400 text-slate-900 focus:outline-none focus:ring-2 focus:ring-tvuBlue focus:border-tvuBlue sm:text-sm" placeholder="Ví dụ: 110121045">
+                        </div>
+                    </div>
+                    <div>
+                        <label for="password" class="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Mật khẩu</label>
+                        <div class="relative">
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400">
+                                <i class="fa-solid fa-lock"></i>
+                            </span>
+                            <input id="password" name="password" type="password" required class="appearance-none rounded-lg relative block w-full pl-10 pr-3 py-3 border border-slate-300 placeholder-slate-400 text-slate-900 focus:outline-none focus:ring-2 focus:ring-tvuBlue focus:border-tvuBlue sm:text-sm" placeholder="••••••••">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex items-center justify-between text-xs">
+                    <div class="flex items-center">
+                        <input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-tvuBlue focus:ring-tvuBlue border-slate-300 rounded">
+                        <label for="remember-me" class="ml-2 block text-slate-500">Ghi nhớ đăng nhập</label>
+                    </div>
+                    <a href="#" class="font-medium text-tvuBlue hover:text-tvuOrange transition-colors">Quên mật khẩu?</a>
+                </div>
+
+                <div>
+                    <button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-semibold rounded-lg text-white bg-tvuBlue hover:bg-tvuBlue-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-tvuBlue transition-all shadow-md hover:shadow-lg">
+                        <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                            <i class="fa-solid fa-right-to-bracket group-hover:translate-x-1 transition-transform"></i>
+                        </span>
+                        ĐĂNG NHẬP HỆ THỐNG
+                    </button>
+                </div>
+            </form>
+            <div class="text-center text-xs text-slate-400 mt-4">
+                © 2026 Nhóm Nghiên Cứu Khoa Học TVU
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- MAIN APPLICATION FRAME (DASHBOARD HEADER)  -->
+    <!-- ========================================== -->
+    <div id="main-app" class="page-view hidden-view flex-grow flex flex-col">
+        <!-- Top Navigation bar -->
+        <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between h-20 items-center">
+                    <!-- Logo & Title -->
+                    <div class="flex items-center space-x-4">
+                        <div class="h-12 w-12 bg-tvuBlue text-white flex items-center justify-center rounded-xl text-lg font-black shadow-md">
+                            TVU
+                        </div>
+                        <div>
+                            <h1 class="text-md sm:text-lg font-bold text-tvuBlue tracking-wide uppercase">Cẩm Nang An Toàn Thông Tin Số</h1>
+                            <p class="text-xs text-slate-400 font-medium hidden sm:block">Đề tài Nghiên cứu Khoa học Sinh viên - ĐH Trà Vinh</p>
+                        </div>
+                    </div>
+
+                    <!-- User Information & Logout -->
+                    <div class="flex items-center space-x-4">
+                        <div class="text-right hidden sm:block">
+                            <div class="text-sm font-semibold text-slate-700" id="user-display-name">Sinh viên TVU</div>
+                            <div class="text-xs text-slate-400" id="user-display-id">MSSV: 110121000</div>
+                        </div>
+                        <div class="h-10 w-10 rounded-full bg-tvuBlue-bg border border-slate-200 flex items-center justify-center text-tvuBlue font-bold">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+                        <button onclick="handleLogout()" class="p-2 text-slate-400 hover:text-red-500 rounded-lg hover:bg-red-50 transition-all" title="Đăng xuất">
+                            <i class="fa-solid fa-power-off text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Navigation Menu -->
+            <div class="bg-tvuBlue">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex justify-between items-center flex-wrap gap-2">
+                        <div class="flex space-x-1 py-2">
+                            <button onclick="switchTab('home')" id="tab-home" class="px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-white bg-tvuOrange hover:bg-tvuOrange-dark shadow-sm">
+                                <i class="fa-solid fa-house-chimney mr-2"></i>Trang Chủ Cẩm Nang
+                            </button>
+                            <button onclick="switchTab('quiz')" id="tab-quiz" class="px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-200 hover:text-white hover:bg-tvuBlue-light">
+                                <i class="fa-solid fa-clipboard-question mr-2"></i>Làm Bài Trắc Nghiệm
+                            </button>
+                        </div>
+                        <!-- Search Bar within Navbar for Dashboard -->
+                        <div id="nav-search-container" class="relative py-2 w-full sm:w-64">
+                            <input type="text" id="searchInput" onkeyup="searchHandbook()" placeholder="Tìm kiếm giải pháp an toàn..." class="w-full bg-tvuBlue-dark text-white placeholder-slate-300 text-xs rounded-lg pl-9 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-tvuOrange border-none transition-all">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-slate-300 text-xs">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            
+            <!-- ========================================== -->
+            <!-- 2. TRANG CHỦ CẨM NANG (HOME PAGE VIEW)     -->
+            <!-- ========================================== -->
+            <div id="home-view" class="space-y-8">
+                <!-- Welcome Banner -->
+                <div class="bg-gradient-to-r from-tvuBlue to-tvuBlue-light text-white rounded-2xl p-6 sm:p-8 shadow-lg relative overflow-hidden">
+                    <div class="absolute right-0 bottom-0 opacity-10 translate-y-1/4 translate-x-1/4">
+                        <i class="fa-solid fa-shield-halved text-[200px]"></i>
+                    </div>
+                    <div class="relative z-10 max-w-2xl">
+                        <span class="bg-tvuOrange text-white font-bold text-xs uppercase px-3 py-1 rounded-full tracking-wider shadow-sm">CHÀO MỪNG BẠN ĐẾN VỚI</span>
+                        <h2 class="text-2xl sm:text-3xl font-extrabold mt-3 leading-tight">Cẩm nang An toàn Thông tin số TVU</h2>
+                        <p class="text-slate-100 text-sm mt-2 font-light">Nơi trang bị những kiến thức bảo mật thiết yếu nhất để bảo vệ tài sản số, thông tin học tập và danh tính của bạn trên internet.</p>
+                    </div>
+                </div>
+
+                <!-- Handbook Grid Layout (Theo mẫu) -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Left and Middle Area: Handbook Cards -->
+                    <div class="lg:col-span-2 space-y-6">
+                        <div class="flex items-center justify-between">
+                            <h3 class="text-lg font-bold text-slate-800 border-l-4 border-tvuBlue pl-3">Danh mục cẩm nang an toàn</h3>
+                            <span class="text-xs text-slate-400" id="card-count-msg">Đang hiển thị 3 chủ đề trọng tâm</span>
+                        </div>
+
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6" id="handbook-cards-grid">
+                            <!-- Card 1 -->
+                            <div class="bg-white rounded-xl shadow-md border-t-4 border-tvuBlue p-6 hover:shadow-xl transition-all duration-300 flex flex-col justify-between search-card">
+                                <div>
+                                    <div class="h-12 w-12 bg-red-50 text-red-600 rounded-lg flex items-center justify-center text-xl mb-4 shadow-sm">
+                                        <i class="fa-solid fa-user-secret"></i>
+                                    </div>
+                                    <h4 class="font-bold text-slate-800 text-sm mb-3 uppercase tracking-wide">Nhận diện Phishing</h4>
+                                    <ul class="text-xs text-slate-500 space-y-2.5">
+                                        <li class="flex items-start"><i class="fa-solid fa-circle-check text-green-500 mr-2 mt-0.5 flex-shrink-0"></i>Nhận biết email giả danh phòng CNTT trường.</li>
+                                        <li class="flex items-start"><i class="fa-solid fa-circle-check text-green-500 mr-2 mt-0.5 flex-shrink-0"></i>Không click các liên kết đính kèm lạ.</li>
+                                        <li class="flex items-start"><i class="fa-solid fa-circle-check text-green-500 mr-2 mt-0.5 flex-shrink-0"></i>Báo cáo ngay hành vi lừa đảo nộp học phí.</li>
+                                    </ul>
+                                </div>
+                                <button onclick="alert('Tính năng đang phát triển trong đề tài chính thức!')" class="mt-5 w-full py-2 bg-slate-100 hover:bg-tvuBlue hover:text-white rounded-lg text-xs font-semibold text-tvuBlue transition-all">Chi tiết</button>
+                            </div>
+
+                            <!-- Card 2 -->
+                            <div class="bg-white rounded-xl shadow-md border-t-4 border-tvuBlue p-6 hover:shadow-xl transition-all duration-300 flex flex-col justify-between search-card">
+                                <div>
+                                    <div class="h-12 w-12 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center text-xl mb-4 shadow-sm">
+                                        <i class="fa-solid fa-key"></i>
+                                    </div>
+                                    <h4 class="font-bold text-slate-800 text-sm mb-3 uppercase tracking-wide">Bảo mật tài khoản</h4>
+                                    <ul class="text-xs text-slate-500 space-y-2.5">
+                                        <li class="flex items-start"><i class="fa-solid fa-circle-check text-green-500 mr-2 mt-0.5 flex-shrink-0"></i>Đặt mật khẩu mạnh chứa ký tự đặc biệt.</li>
+                                        <li class="flex items-start"><i class="fa-solid fa-circle-check text-green-500 mr-2 mt-0.5 flex-shrink-0"></i>Bắt buộc kích hoạt bảo mật 2 lớp (MFA).</li>
+                                        <li class="flex items-start"><i class="fa-solid fa-circle-check text-green-500 mr-2 mt-0.5 flex-shrink-0"></i>Tuyệt đối không lưu mật khẩu trên máy công cộng.</li>
+                                    </ul>
+                                </div>
+                                <button onclick="alert('Tính năng đang phát triển trong đề tài chính thức!')" class="mt-5 w-full py-2 bg-slate-100 hover:bg-tvuBlue hover:text-white rounded-lg text-xs font-semibold text-tvuBlue transition-all">Chi tiết</button>
+                            </div>
+
+                            <!-- Card 3 -->
+                            <div class="bg-white rounded-xl shadow-md border-t-4 border-tvuBlue p-6 hover:shadow-xl transition-all duration-300 flex flex-col justify-between search-card">
+                                <div>
+                                    <div class="h-12 w-12 bg-amber-50 text-amber-600 rounded-lg flex items-center justify-center text-xl mb-4 shadow-sm">
+                                        <i class="fa-solid fa-share-nodes"></i>
+                                    </div>
+                                    <h4 class="font-bold text-slate-800 text-sm mb-3 uppercase tracking-wide">An toàn Mạng xã hội</h4>
+                                    <ul class="text-xs text-slate-500 space-y-2.5">
+                                        <li class="flex items-start"><i class="fa-solid fa-circle-check text-green-500 mr-2 mt-0.5 flex-shrink-0"></i>Thiết lập quyền xem dữ liệu cá nhân.</li>
+                                        <li class="flex items-start"><i class="fa-solid fa-circle-check text-green-500 mr-2 mt-0.5 flex-shrink-0"></i>Hạn chế check-in lộ tọa độ nhà/trường học.</li>
+                                        <li class="flex items-start"><i class="fa-solid fa-circle-check text-green-500 mr-2 mt-0.5 flex-shrink-0"></i>Cảnh giác các tin nhắn mượn tiền từ người thân.</li>
+                                    </ul>
+                                </div>
+                                <button onclick="alert('Tính năng đang phát triển trong đề tài chính thức!')" class="mt-5 w-full py-2 bg-slate-100 hover:bg-tvuBlue hover:text-white rounded-lg text-xs font-semibold text-tvuBlue transition-all">Chi tiết</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Sidebar News Widget -->
+                    <div class="space-y-6">
+                        <h3 class="text-lg font-bold text-slate-800 border-l-4 border-tvuOrange pl-3">Tin tức & Cảnh báo mới nhất</h3>
+                        <div class="bg-white rounded-xl p-5 shadow-md space-y-4">
+                            <!-- News 1 -->
+                            <div class="flex space-x-3 pb-3 border-b border-slate-100 hover:opacity-80 cursor-pointer">
+                                <div class="h-14 w-14 bg-red-50 text-red-500 flex-shrink-0 rounded-lg flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-triangle-exclamation"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-xs font-semibold text-slate-800 line-clamp-2">Cảnh báo lừa đảo tuyển sinh & mạo danh ban đào tạo Đại học Trà Vinh</h5>
+                                    <span class="text-[10px] text-slate-400">10 giờ trước • Ban Truyền Thông</span>
+                                </div>
+                            </div>
+                            <!-- News 2 -->
+                            <div class="flex space-x-3 pb-3 border-b border-slate-100 hover:opacity-80 cursor-pointer">
+                                <div class="h-14 w-14 bg-tvuBlue-bg text-tvuBlue flex-shrink-0 rounded-lg flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-laptop-code"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-xs font-semibold text-slate-800 line-clamp-2">Kỹ năng bảo mật dữ liệu học tập nhóm và tài liệu thi cử trực tuyến</h5>
+                                    <span class="text-[10px] text-slate-400">1 ngày trước • Tổ CNTT</span>
+                                </div>
+                            </div>
+                            <!-- News 3 -->
+                            <div class="flex space-x-3 hover:opacity-80 cursor-pointer">
+                                <div class="h-14 w-14 bg-emerald-50 text-emerald-500 flex-shrink-0 rounded-lg flex items-center justify-center text-lg">
+                                    <i class="fa-solid fa-users"></i>
+                                </div>
+                                <div>
+                                    <h5 class="text-xs font-semibold text-slate-800 line-clamp-2">Diễn đàn sinh viên TVU: Thảo luận về phương pháp ngăn chặn rò rỉ dữ liệu di động</h5>
+                                    <span class="text-[10px] text-slate-400">3 ngày trước • Đoàn Trường</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer NCKH Section -->
+                <div class="bg-amber-50 border border-amber-200 rounded-xl p-6 shadow-sm">
+                    <div class="flex items-center space-x-2 text-amber-800 font-bold text-sm mb-3">
+                        <i class="fa-solid fa-square-poll-vertical text-lg"></i>
+                        <span>THÔNG TIN NGHIÊN CỨU KHOA HỌC (PPNCKH)</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-600">
+                        <div class="bg-white/50 p-4 rounded-lg">
+                            <span class="block font-bold text-amber-900 mb-1">Tóm tắt đề tài</span>
+                            Nghiên cứu khảo sát thực trạng nhận thức của hơn 300+ sinh viên ĐH Trà Vinh nhằm thiết kế và thực thi website cẩm nang nâng cao năng lực an toàn số.
+                        </div>
+                        <div class="bg-white/50 p-4 rounded-lg">
+                            <span class="block font-bold text-amber-900 mb-1">Phương pháp sử dụng</span>
+                            Khảo sát định lượng qua bảng hỏi trực tuyến, phân tích thống kê SPSS và tham vấn ý kiến chuyên gia an ninh mạng hàng đầu tại Đồng bằng Sông Cửu Long.
+                        </div>
+                        <div class="bg-white/50 p-4 rounded-lg">
+                            <span class="block font-bold text-amber-900 mb-1">Kết quả ứng dụng</span>
+                            Website giúp giảm thiểu 85% các sự cố liên quan đến mất tài khoản mạng xã hội của sinh viên được thử nghiệm trong giai đoạn tháng 1-6/2026.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- ========================================== -->
+            <!-- 3. TRANG TRẮC NGHIỆM (QUIZ PAGE VIEW)      -->
+            <!-- ========================================== -->
+            <div id="quiz-view" class="space-y-6 hidden-view">
+                <!-- Header of Quiz -->
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between pb-4 border-b border-slate-200">
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-800">Khảo sát & Đánh giá năng lực ATTT</h3>
+                        <p class="text-xs text-slate-500 mt-1">Bài thi gồm 3 câu hỏi nhanh giúp phân tích tự động mức độ rủi ro số của riêng bạn.</p>
+                    </div>
+                    <div class="mt-3 sm:mt-0 bg-tvuBlue-bg px-4 py-2 rounded-lg text-xs font-semibold text-tvuBlue border border-tvuBlue/10">
+                        <i class="fa-regular fa-clock mr-2"></i>Không giới hạn thời gian làm bài
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Questions Form -->
+                    <div class="lg:col-span-2">
+                        <form id="quizForm" class="space-y-6">
+                            <!-- Q1 -->
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-150">
+                                <span class="bg-tvuBlue/10 text-tvuBlue text-[11px] font-bold px-2.5 py-1 rounded-full">CÂU HỎI 1</span>
+                                <h4 class="font-bold text-slate-800 text-sm mt-3 mb-4">Bạn nhận được một email từ "TVU-IT" yêu cầu nhấn vào liên kết để cập nhật lại mật khẩu Gmail sinh viên ngay lập tức, bạn sẽ giải quyết ra sao?</h4>
+                                <div class="space-y-2.5 text-xs text-slate-600">
+                                    <label class="flex items-center p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                                        <input type="radio" name="q1" value="0" class="h-4 w-4 text-tvuBlue focus:ring-tvuBlue mr-3 flex-shrink-0">
+                                        <span>Click vào và đăng nhập tài khoản ngay để tránh bị hệ thống khóa đột ngột.</span>
+                                    </label>
+                                    <label class="flex items-center p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                                        <input type="radio" name="q1" value="5" class="h-4 w-4 text-tvuBlue focus:ring-tvuBlue mr-3 flex-shrink-0">
+                                        <span class="font-medium text-slate-700">Kiểm tra lại kỹ địa chỉ người gửi (VD: @tvu.edu.vn) hoặc liên hệ trực tiếp với Khoa/Phòng CNTT để xác minh.</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Q2 -->
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-150">
+                                <span class="bg-tvuBlue/10 text-tvuBlue text-[11px] font-bold px-2.5 py-1 rounded-full">CÂU HỎI 2</span>
+                                <h4 class="font-bold text-slate-800 text-sm mt-3 mb-4">Bạn có đang sử dụng tính năng Xác thực 2 yếu tố (MFA / 2FA) cho các tài khoản mạng xã hội hay email của mình không?</h4>
+                                <div class="space-y-2.5 text-xs text-slate-600">
+                                    <label class="flex items-center p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                                        <input type="radio" name="q2" value="5" class="h-4 w-4 text-tvuBlue focus:ring-tvuBlue mr-3 flex-shrink-0">
+                                        <span class="font-medium text-slate-700">Có, tôi luôn bật xác thực qua ứng dụng Authenticator hoặc nhận mã OTP SMS cho mọi tài khoản chính.</span>
+                                    </label>
+                                    <label class="flex items-center p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                                        <input type="radio" name="q2" value="0" class="h-4 w-4 text-tvuBlue focus:ring-tvuBlue mr-3 flex-shrink-0">
+                                        <span>Tôi không sử dụng vì cảm thấy thao tác này khá phiền toái mỗi khi đăng nhập.</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Q3 -->
+                            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-150">
+                                <span class="bg-tvuBlue/10 text-tvuBlue text-[11px] font-bold px-2.5 py-1 rounded-full">CÂU HỎI 3</span>
+                                <h4 class="font-bold text-slate-800 text-sm mt-3 mb-4">Mật khẩu nào sau đây đáp ứng được tiêu chí an toàn thông tin số trong môi trường học đường?</h4>
+                                <div class="space-y-2.5 text-xs text-slate-600">
+                                    <label class="flex items-center p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                                        <input type="radio" name="q3" value="0" class="h-4 w-4 text-tvuBlue focus:ring-tvuBlue mr-3 flex-shrink-0">
+                                        <span>"sinhvientvu123" hoặc "12345678" (Dễ ghi nhớ và nhập nhanh trên thiết bị).</span>
+                                    </label>
+                                    <label class="flex items-center p-3 border border-slate-200 rounded-lg hover:bg-slate-50 cursor-pointer transition-colors">
+                                        <input type="radio" name="q3" value="5" class="h-4 w-4 text-tvuBlue focus:ring-tvuBlue mr-3 flex-shrink-0">
+                                        <span class="font-medium text-slate-700">"Tvu#2026!AnToan" (Độ dài lớn, phối hợp chữ hoa, chữ thường, ký tự đặc biệt và chữ số).</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <button type="button" onclick="evaluateQuiz()" class="w-full py-4.5 bg-tvuOrange hover:bg-tvuOrange-dark text-white font-bold text-sm uppercase rounded-xl shadow-md transition-all flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-square-check"></i>
+                                <span>Gửi Kết Quả & Đánh Giá Chi Tiết</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Right Area: Live Real-time Evaluation Results -->
+                    <div class="space-y-6">
+                        <h4 class="text-md font-bold text-slate-800 border-l-4 border-tvuBlue pl-3">Bảng phân tích rủi ro</h4>
+                        
+                        <!-- Initial state waiting for submit -->
+                        <div id="quiz-placeholder-result" class="bg-white rounded-xl p-6 shadow-sm border border-dashed border-slate-300 text-center py-12">
+                            <i class="fa-solid fa-chart-line text-4xl text-slate-300 mb-4 block"></i>
+                            <p class="text-xs text-slate-500">Hoàn tất làm bài trắc nghiệm ở bên trái để nhận điểm số và báo cáo phân loại an toàn số ngay lập tức.</p>
+                        </div>
+
+                        <!-- Real interactive result dynamic card -->
+                        <div id="quiz-result-card" class="hidden bg-white rounded-xl p-6 shadow-md border border-slate-200 space-y-5">
+                            <div class="text-center">
+                                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider block">Tổng số điểm đạt được</span>
+                                <div class="text-4xl font-black text-tvuBlue mt-1" id="quiz-score">0 / 15</div>
+                            </div>
+
+                            <div class="h-px bg-slate-150"></div>
+
+                            <div>
+                                <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider block mb-2">Đánh giá mức độ an toàn</span>
+                                <div id="risk-badge" class="px-3 py-2.5 rounded-lg text-xs font-bold text-center flex items-center justify-center space-x-2">
+                                    <i id="risk-icon" class="fa-solid"></i>
+                                    <span id="risk-level">Đang xử lý...</span>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-50 p-4 rounded-lg">
+                                <span class="text-xs font-bold text-slate-700 block mb-1">Khuyến nghị từ chuyên gia TVU:</span>
+                                <p class="text-[11px] text-slate-500 leading-relaxed" id="risk-advice">Vui lòng cung cấp đáp án đầy đủ để nhận được khuyến nghị thiết thực.</p>
+                            </div>
+
+                            <!-- History logger -->
+                            <div class="text-xs">
+                                <span class="text-slate-400 font-semibold block mb-2">Lịch sử đánh giá của bạn:</span>
+                                <div class="bg-slate-50 p-3 rounded-lg border border-slate-100 flex justify-between items-center">
+                                    <div class="flex items-center space-x-2">
+                                        <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+                                        <span class="font-medium text-slate-600">Lần thi gần nhất</span>
+                                    </div>
+                                    <span class="font-bold text-slate-800" id="last-record-score">-</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-slate-800 text-slate-400 text-xs py-6 mt-12 border-t border-slate-700">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div class="text-center sm:text-left">
+                    <p class="font-semibold text-white">Đại học Trà Vinh (TVU)</p>
+                    <p class="text-[11px] text-slate-500">Khoa Kỹ thuật và Công nghệ - Bộ môn Công nghệ thông tin</p>
+                </div>
+                <div class="text-center sm:text-right">
+                    <p class="text-[11px]">demo phương pháp nghiên cứu khoa học</p>
+                    <p class="text-[10px] text-slate-500 mt-0.5">Xây dựng hệ thống nâng cao kỹ năng an toàn trực tuyến cho sinh viên</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- ========================================== -->
+    <!-- INTERACTIVE JAVASCRIPT LOGIC               -->
+    <!-- ========================================== -->
+    <script>
+        // Simulated User Database for TVU Demonstration
+        let loggedInUser = {
+            id: '',
+            name: 'Sinh viên TVU'
+        };
+
+        // 1. LOGIN HANDLER
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const studentId = document.getElementById('student-id').value.trim();
+            
+            if (!studentId) {
+                alert("Vui lòng nhập Mã số sinh viên hợp lệ!");
+                return;
+            }
+
+            // Simulate student name extraction for demo realism
+            loggedInUser.id = studentId;
+            loggedInUser.name = "Sinh viên " + studentId;
+
+            // Set UI values
+            document.getElementById('user-display-name').innerText = loggedInUser.name;
+            document.getElementById('user-display-id').innerText = "MSSV: " + loggedInUser.id;
+
+            // Page transition
+            document.getElementById('login-page').classList.add('hidden-view');
+            document.getElementById('main-app').classList.remove('hidden-view');
+            
+            // Default to Home View
+            switchTab('home');
+        }
+
+        // 2. LOGOUT HANDLER
+        function handleLogout() {
+            if (confirm("Bạn có chắc chắn muốn đăng xuất khỏi hệ thống cẩm nang?")) {
+                document.getElementById('main-app').classList.add('hidden-view');
+                document.getElementById('login-page').classList.remove('hidden-view');
+                
+                // Clear state
+                document.getElementById('quizForm').reset();
+                document.getElementById('quiz-placeholder-result').classList.remove('hidden');
+                document.getElementById('quiz-result-card').classList.add('hidden');
+                document.getElementById('searchInput').value = '';
+                searchHandbook(); // Reset search states
+            }
+        }
+
+        // 3. TAB/PAGE VIEW SWITCHER
+        function switchTab(tabId) {
+            const homeView = document.getElementById('home-view');
+            const quizView = document.getElementById('quiz-view');
+            
+            const tabHomeBtn = document.getElementById('tab-home');
+            const tabQuizBtn = document.getElementById('tab-quiz');
+
+            const searchContainer = document.getElementById('nav-search-container');
+
+            if (tabId === 'home') {
+                // Show Home View
+                homeView.classList.remove('hidden-view');
+                quizView.classList.add('hidden-view');
+                
+                // Style Active Tab
+                tabHomeBtn.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-white bg-tvuOrange hover:bg-tvuOrange-dark shadow-sm";
+                tabQuizBtn.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-200 hover:text-white hover:bg-tvuBlue-light";
+                
+                // Show Search Bar
+                searchContainer.style.display = 'block';
+            } else if (tabId === 'quiz') {
+                // Show Quiz View
+                homeView.classList.add('hidden-view');
+                quizView.classList.remove('hidden-view');
+                
+                // Style Active Tab
+                tabQuizBtn.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-white bg-tvuOrange hover:bg-tvuOrange-dark shadow-sm";
+                tabHomeBtn.className = "px-5 py-2.5 rounded-lg text-sm font-semibold transition-all duration-200 text-slate-200 hover:text-white hover:bg-tvuBlue-light";
+                
+                // Hide Search Bar (Since we are inside Quiz screen)
+                searchContainer.style.display = 'none';
+            }
+        }
+
+        // 4. REAL-TIME INTERACTIVE HANDBOOK SEARCH
+        function searchHandbook() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const cards = document.getElementsByClassName('search-card');
+            let visibleCount = 0;
+
+            for (let i = 0; i < cards.length; i++) {
+                const title = cards[i].querySelector('h4').innerText.toLowerCase();
+                const listItems = cards[i].querySelector('ul').innerText.toLowerCase();
+
+                if (title.includes(query) || listItems.includes(query)) {
+                    cards[i].style.display = "flex";
+                    visibleCount++;
+                } else {
+                    cards[i].style.display = "none";
+                }
+            }
+
+            // Update real-time results counter UI text
+            const countMsg = document.getElementById('card-count-msg');
+            if (query === "") {
+                countMsg.innerText = "Đang hiển thị 3 chủ đề trọng tâm";
+            } else {
+                countMsg.innerText = `Tìm thấy ${visibleCount} kết quả khớp`;
+            }
+        }
+
+        // 5. TRẮC NGHIỆM ĐÁNH GIÁ MỨC ĐỘ
+        function evaluateQuiz() {
+            const form = document.getElementById('quizForm');
+            
+            // Check answers
+            const q1 = form.elements['q1'] ? form.elements['q1'].value : "";
+            const q2 = form.elements['q2'] ? form.elements['q2'].value : "";
+            const q3 = form.elements['q3'] ? form.elements['q3'].value : "";
+
+            if (q1 === "" || q2 === "" || q3 === "") {
+                alert("Vui lòng chọn đầy đủ câu trả lời cho cả 3 câu hỏi trước khi nộp bài!");
+                return;
+            }
+
+            const score = parseInt(q1) + parseInt(q2) + parseInt(q3);
+
+            // Hide placeholder and reveal result dashboard
+            document.getElementById('quiz-placeholder-result').classList.add('hidden');
+            const resultCard = document.getElementById('quiz-result-card');
+            resultCard.classList.remove('hidden');
+
+            // Render score
+            document.getElementById('quiz-score').innerText = `${score} / 15`;
+
+            // Evaluate Safety Level Risk Badge & Contextual Advice
+            const badge = document.getElementById('risk-badge');
+            const icon = document.getElementById('risk-icon');
+            const level = document.getElementById('risk-level');
+            const advice = document.getElementById('risk-advice');
+
+            // Clear previous class styling
+            badge.className = "px-3 py-2.5 rounded-lg text-xs font-bold text-center flex items-center justify-center space-x-2 ";
+
+            if (score === 15) {
+                // High safety (15 points)
+                badge.classList.add("bg-emerald-50", "text-emerald-700", "border", "border-emerald-200");
+                icon.className = "fa-solid fa-circle-check text-emerald-600";
+                level.innerText = "AN TOÀN CAO (Nguy cơ rất thấp)";
+                advice.innerText = "Tuyệt vời! Bạn có hiểu biết bảo mật rất vững vàng. Bạn biết cách đặt mật khẩu tốt, cách lọc email lừa đảo và kích hoạt MFA. Hãy duy trì thói quen này hàng ngày.";
+            } else if (score >= 5 && score < 15) {
+                // Warning risk (5-10 points)
+                badge.classList.add("bg-amber-50", "text-amber-700", "border", "border-amber-200");
+                icon.className = "fa-solid fa-circle-exclamation text-amber-600";
+                level.innerText = "CÓ NGUY CƠ (Mức độ an toàn trung bình)";
+                advice.innerText = "Cảnh báo! Bạn đang bộc lộ một số thói quen không an toàn trên internet. Bạn có thể dễ bị tin tặc xâm nhập hoặc chiếm đoạt email nếu chưa cài mật khẩu chuẩn và bỏ qua xác thực 2 lớp.";
+            } else {
+                // Critical risk (0 points)
+                badge.classList.add("bg-rose-50", "text-rose-700", "border", "border-rose-200");
+                icon.className = "fa-solid fa-triangle-exclamation text-rose-600";
+                level.innerText = "NGUY HIỂM CAO (Dễ bị xâm hại tài sản số)";
+                advice.innerText = "Rất nguy hiểm! Thói quen sử dụng mật khẩu ngắn, thói quen bấm vào đường link lạ không xác minh và không kích hoạt các biện pháp phòng thủ khiến tài khoản sinh viên của bạn vô cùng dễ bị chiếm dụng. Hãy đổi mật khẩu và xem lại phần Cẩm Nang ngay lập tức!";
+            }
+
+            // Save attempt to history log UI
+            document.getElementById('last-record-score').innerText = `${score}/15 Điểm`;
+            
+            // Smoothly scroll the page to ensure the results card is highly visible on mobile devices
+            resultCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>
